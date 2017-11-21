@@ -1,7 +1,6 @@
 #!bin/bash
 
-chown -R www-data:www-data /var/moodledata
-chmod 777 /var/moodledata
+chown -R www-data:www-data /moodle/moodledata
 
 rm -rf /var/www/html/config.php
 cp ./config.php /var/www/html/config.php

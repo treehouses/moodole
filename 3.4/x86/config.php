@@ -15,7 +15,7 @@ $CFG->dboptions = array(
     'dbport'    => getenv('DB_PORT_3306_TCP_PORT'),
 );
 $CFG->wwwroot   = getenv('MOODLE_URL');
-$CFG->dataroot  = '/var/moodledata';
+$CFG->dataroot  = '/moodle/moodledata';
 $CFG->directorypermissions = 02777;
 $CFG->admin = 'admin';
 $CFG->noemailever = true;    // NOT FOR PRODUCTION SERVERS!
