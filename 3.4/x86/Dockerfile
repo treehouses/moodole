@@ -3,11 +3,11 @@ LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
 ENV version '3.4.0'
 
-EXPOSE 80 
+EXPOSE 80
 
-ADD ./start.sh /etc/apache2/start.sh 
+ADD ./start.sh /etc/apache2/start.sh
 
-RUN apt-get update && \ 
+RUN apt-get update && \
 	apt-get -y install wget unzip apache2 php libapache2-mod-php7.0 php-xml php-zip \
         php7.0-mysql php7.0-curl php7.0-xmlrpc php7.0-gd php7.0-intl
 
@@ -18,6 +18,6 @@ RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/a
 	chown -R www-data:www-data /var/www/html && \
 	chmod +x /etc/apache2/start.sh && \
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
-	chown -R www-data:www-data /var/www/moodledata 
-		
+	chown -R www-data:www-data /var/www/moodledata
+
 CMD ["/etc/apache2/start.sh"]
