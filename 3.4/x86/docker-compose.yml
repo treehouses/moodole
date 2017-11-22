@@ -16,7 +16,5 @@ moodle:
     - "80:80"
   links:
     - moodledb
-  #volumes:
-   # - ./moodle:/var/www/html
   environment:
     - MOODLE_URL=http://127.0.0.1:80 
