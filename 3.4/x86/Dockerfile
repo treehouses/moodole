@@ -1,15 +1,23 @@
 FROM i386/ubuntu:16.04
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
-VOLUME ["/var/moodledata", "/var/www/html"]
-EXPOSE 80 
+ENV version '3.4.0'
+
+EXPOSE 80
 
 ADD ./start.sh /etc/apache2/start.sh
 
-RUN apt-get update && \ 
-	apt-get -y install apache2 php libapache2-mod-php7.0 php-xml php-zip \
-        php7.0-mysql php7.0-curl php7.0-xmlrpc php7.0-gd php7.0-intl && \	
+RUN apt-get update && \
+	apt-get -y install wget unzip apache2 php libapache2-mod-php7.0 php-xml php-zip \
+        php7.0-mysql php7.0-curl php7.0-xmlrpc php7.0-gd php7.0-intl
+
+RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
+	rm -rf /var/www/html/ && \
+	cd /var/www && tar xvf moodle-${version}.tar.gz && \
+	mv /var/www/moodle-${version} /var/www/html && \
 	chown -R www-data:www-data /var/www/html && \
-	chmod +x /etc/apache2/start.sh
+	chmod +x /etc/apache2/start.sh && \
+	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
+	chown -R www-data:www-data /var/www/moodledata
 
 CMD ["/etc/apache2/start.sh"]
