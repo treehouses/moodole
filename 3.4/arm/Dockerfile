@@ -20,4 +20,6 @@ RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/a
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
 	chown -R www-data:www-data /var/www/moodledata
 
+COPY ./config/php.ini /etc/php/7.0/apache2/php.ini
+
 CMD ["/etc/apache2/start.sh"]
