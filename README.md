@@ -7,7 +7,7 @@ Moodle E Learning running on ARM with Raspberry Pi by Open Learning Exchange
 
 ---
 
-**For x86**
+**For x86:**
 ```
 # moodledb is the database host
 moodledb:
@@ -33,7 +33,7 @@ moodle:
 
 ---
 
-**For ARM: **
+**For ARM:**
 ```
 moodledb_rpi:
   image: arm32v7/postgres
