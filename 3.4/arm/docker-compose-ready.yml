@@ -1,0 +1,18 @@
+moodledb_rpi:
+  image: rotschopf/rpi-postgres:9.5.4
+  container_name: moodledb_rpi
+  ports:
+    - "5432:5432"
+  environment:
+    - POSTGRES_DATABASE=moodle
+    - POSTGRES_USER=moodle
+    - POSTGRES_PASSWORD=moodle
+moodle_rpi:
+  image: treehouses/moodle:arm
+  container_name: moodle_rpi
+  ports:
+    - "8080:80"
+  links:
+    - moodledb_rpi
+  environment:
+    - MOODLE_URL=http://kraken.ole.org:80
