@@ -1,0 +1,18 @@
+moodledb_alpine:
+  image: postgres:10
+  container_name: moodledb_alpine
+  ports:
+    - "5432:5432"
+  environment:
+    - POSTGRES_DATABASE=moodle
+    - POSTGRES_USER=moodle
+    - POSTGRES_PASSWORD=moodle
+moodle_alpine:
+  build: .
+  container_name: moodle_alpine
+  ports:
+    - "80:80"
+  links:
+    - moodledb_alpine
+  environment:
+    - MOODLE_URL=http://127.0.0.1:80
