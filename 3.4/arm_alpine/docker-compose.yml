@@ -1,0 +1,18 @@
+moodledb_alpine:
+  image: arm32v7/postgres
+  container_name: moodledb_alpine_arm
+  ports:
+    - "4000:5432"
+  environment:
+    - POSTGRES_DATABASE=moodle
+    - POSTGRES_USER=moodle
+    - POSTGRES_PASSWORD=moodle
+moodle_alpine:
+  build: .
+  container_name: moodle_alpine_arm
+  ports:
+    - "8090:80"
+  links:
+    - moodledb_alpine
+  environment:
+    - MOODLE_URL=http://docker.ole.org:80
