@@ -20,7 +20,7 @@ services:
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
   moodle:
-    image: treehouses/moodle:x86-pgsql-1.1
+    image: treehouses/moodle:latest
     container_name: moodle
     ports:
       - "80:80"
@@ -32,6 +32,8 @@ services:
     - MOODOLE_DB_USER=moodle
     - MOODOLE_DB_PASS=moodle
     - MOODOLE_DB_PORT=5432
+    - MOODOLE_POST_MAX_SIZE=200M
+    - MOODOLE_UPLOAD_MAX_FILESIZE=200M
 ```
 
 ---
