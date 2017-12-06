@@ -51,7 +51,7 @@ services:
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
   moodle_rpi:
-    treehouses/moodle:rpi-latest
+    image: treehouses/moodle:rpi-latest
     container_name: moodle_rpi
     ports:
       - "80:80"
