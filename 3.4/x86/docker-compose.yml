@@ -1,19 +1,25 @@
-# moodledb is the database host
-moodledb:
-  image: mysql
-  container_name: moodledb
-  ports:
-    - "4000:3306"
-  environment:
-    - MYSQL_DATABASE=moodle
-    - MYSQL_USER=moodle
-    - MYSQL_PASSWORD=moodle
-moodle:
-  build: .
-  container_name: moodle
-  ports:
-    - "80:80"
-  links:
-    - moodledb
-  environment:
-    - MOODLE_URL=http://127.0.0.1:80
+version: '2'
+services:
+  moodledb:
+    image: postgres
+    container_name: moodledb
+    environment:
+    # MAKE SURE THIS ONE SAME WITH THE MOODLE
+    - POSTGRES_DATABASE=moodle
+    - POSTGRES_USER=moodle
+    - POSTGRES_PASSWORD=moodle
+  moodle:
+    build: .
+    container_name: moodle
+    ports:
+      - "80:80"
+    volumes:
+    - /home/pi/apache2:/var/run/apache2
+    environment:
+    - MOODOLE_DB_URL=moodledb
+    - MOODOLE_DB_NAME=moodle
+    - MOODOLE_DB_USER=moodle
+    - MOODOLE_DB_PASS=moodle
+    - MOODOLE_DB_PORT=5432
+    - MOODOLE_POST_MAX_SIZE=200M
+    - MOODOLE_UPLOAD_MAX_FILESIZE=200M
