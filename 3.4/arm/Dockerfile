@@ -9,7 +9,7 @@ ADD ./start.sh /etc/apache2/start.sh
 
 RUN apt-get update && \
 	apt-get -y install wget unzip apache2 php libapache2-mod-php7.0 php-xml php-zip \
-        php7.0-pgsql php7.0-curl php7.0-xmlrpc php7.0-gd php7.0-intl
+        php7.0-pgsql php7.0-curl php7.0-xmlrpc php7.0-gd php7.0-intl php7.0-mysql
 
 RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
 	rm -rf /var/www/html/ && \
@@ -20,6 +20,6 @@ RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/a
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
 	chown -R www-data:www-data /var/www/moodledata
 
-COPY ./config/php.ini /etc/php/7.0/apache2/php.ini
+COPY ./config.php /var/www/html/
 
 CMD ["/etc/apache2/start.sh"]
