@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
 	rm -rf /var/www/html/ && \
 	cd /var/www && tar xvf moodle-${version}.tar.gz && \
-	rm -rf moodle-${version}.tar.gz && \
+	rm moodle-${version}.tar.gz && \
 	mv /var/www/moodle-${version} /var/www/html && \
 	chown -R www-data:www-data /var/www/html && \
 	chmod +x /etc/apache2/start.sh &&\
