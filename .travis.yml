@@ -18,7 +18,10 @@ services:
   - docker
 script:
   - source ./.travis/travis_utils.sh
-  - build_message under construction ...
+  - build_message No test in this build, only docker image will be built...
 deploy:
-  - source ./.travis/travis_utils.sh
-  - build_message under construction ...
+  provider: script
+  skip_cleanup: true
+  script: ./.travis/deploy_docker.sh
+  on:
+    all_branches: true
