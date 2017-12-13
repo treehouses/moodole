@@ -16,6 +16,9 @@ notifications:
     on_start: never     # options: [always|never|change] default: never
 services:
   - docker
+script:
+  - source ./.travis/travis_utils.sh
+  - build_message under construction ...
 deploy:
   provider: script
   script:
