@@ -20,9 +20,5 @@ script:
   - source ./.travis/travis_utils.sh
   - build_message under construction ...
 deploy:
-  provider: script
-  script:
-    - source ./.travis/travis_utils.sh
-    - build_message under construction ...
-  on:
-    all_branches: true
+  - source ./.travis/travis_utils.sh
+  - build_message under construction ...
