@@ -1,7 +1,6 @@
 #!bin/bash
 
 source /etc/apache2/envvars
-tail -F /var/log/apache2/* &
 
 if [ ! -z "${MOODOLE_POST_MAX_SIZE}" ]
 then
