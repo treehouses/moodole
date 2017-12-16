@@ -16,6 +16,8 @@ login_docker(){
 prepare_package(){
 	DOCKER_ORG=treehouses
 	DOCKER_REPO=moodle
+	echo "$BRANCH"
+	echo "$COMMIT"
 	VERSION=$(cat package.json | grep version | awk '{print$2}' | awk '{print substr($0, 2, length($0) - 3)}')
 	if [ -z "$BRANCH" ]; then
 		BRANCH=$TRAVIS_BRANCH
@@ -27,12 +29,6 @@ prepare_package(){
 	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
 	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
 	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
-}
-
-clone_branch(){
-    cd /tmp && rm -rf $FINGERPRINT;
-    git clone -b "$branch" "$REPO_LINK" "$FINGERPRINT" && cd "$FINGERPRINT" || exit
-    git checkout "$commit"
 }
 
 remove_temporary_folders(){

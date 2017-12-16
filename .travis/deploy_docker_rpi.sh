@@ -64,14 +64,24 @@ prepare_package_arm
 build_message Cloning commits...
 clone_branch
 
+
+echo "$BRANCH"
+echo "$COMMIT"
+echo "$ARM_DOCKER_NAME"
+echo "$VERSION"
 build_message setting up build utils...
 source ./.travis/travis_utils.sh
+prepare_package
+echo "$BRANCH"
+echo "$COMMIT"
+echo "$ARM_DOCKER_NAME"
+echo "$VERSION"
 
 build_message Creating footprint...
 create_footprint_moodole
 
 build_message Build ARM image started...
-deploy_arm
+# deploy_arm
 build_message Buil ARM image finished, check build result!
 
 build_message Peform postconditions on build machine..
