@@ -32,4 +32,4 @@ env:
   - secure: IB2QR3tCyzt15mqrgTjvnDnn9fFmrbn6kWbpyobFMBCp5AqfK9RLCkxgISrcW1FGSV+pQ5CGAhgRsnyagGMSu9sGCt21VMV8WDALIi/C3PAPGutnrrUQkXaVvRe6e9p35PxjSkQ2sxRd0gSz/sVIRJ/rUHC6t1JnEgnebDvJSeU3SSwrPVlSeFyBv3gHPDkIODxpr7p024pF/slTM8XJJRYmEiVqUPXKGbzFhSOfdM+oZLU3Ned8FaBA1kAynq81wAylcwNQWSmRizrq2KQlr8OBsTJz+PF+eG1h9j/SG4os86JVfBpxtE4PqsPxQ7ppkTvk57kKXruGq4ZPp7OUDWlDW4t47Ez/KV5KLAt0GQdPbDvoD+RuJhBkPry9BqUGYy4W08gcm8BdXKRdeVYDOaVRpeBynWmqFtIYjJELSEXqaXhdSq2+0Ss5URMQ+Rja3J5NPzyT+0DJgdPvhdWVlu/NnBvmQnj+qD7fzL89Chx5TjRfBE6rFbmKWh+Nn0TeFJPkK2idsyY8NHe0wGjdnkN3JcwlITtmLqJ7RpUQvIEDL9MjSGaKZLMrdmTYjYpHbrR6kgypFEbY4MIJK1cLus/P+DzTxhjNO42JgB57Ao8E/BbaHSpIq82VtGGbIrTCpymdvIl3C+dNCEv+ppcVW3m7Sy4UsJzos2o3zXktQJ0=
 before_install:
 - openssl aes-256-cbc -K $encrypted_904aea9e00f1_key -iv $encrypted_904aea9e00f1_iv
-  -in ./.travis/deploy_rsa.enc deploy_rsa.enc -out ./.travis/deploy_rsa -d
+  -in ./.travis/deploy_rsa.enc -out ./.travis/deploy_rsa -d
