@@ -5,16 +5,16 @@ for i in "$@"
 do
 case $i in
     -u=*|--duser=*)
-      duser="${i#*=}"
+      DOCKER_USER="${i#*=}"
       ;;
     -k=*|--dpass=*)
-      dpass="${i#*=}"
+      DOCKER_PASS="${i#*=}"
       ;;
     -b=*|--branch=*)
-        branch="${i#*=}"
+        BRANCH_INPUT="${i#*=}"
         ;;
     -c=*|--commit=*)
-        commit="${i#*=}"
+        COMMIT_INPUT="${i#*=}"
         ;;
     *)
     echo "usage: ./deploy_docker_rpi.sh -b=<branch-name>|--branch=<branch-name>"
@@ -36,17 +36,6 @@ build_message(){
     echo
 }
 
-clone_branch(){
-    cd /tmp && rm -rf $FINGERPRINT;
-    git clone -b "$branch" "$REPO_LINK" "$FINGERPRINT" && cd "$FINGERPRINT" || exit
-    ls
-    git checkout "$commit"
-}
-
-random_generator(){
-    awk -v min=10000000 -v max=99999999 'BEGIN{srand(); print int(min+rand()*(max-min+1))}'
-}
-
 prepare_package_arm(){
 	BRANCH=$BRANCH_INPUT
 	COMMIT=$COMMIT_INPUT
@@ -56,6 +45,17 @@ prepare_package_arm(){
 	REPO_LINK="https://github.com/ole-vi/moodole.git"
 	FOOTPRINT_NAME=$VERSION-$BRANCH-$COMMIT
 	FOOTPRINT=~/travis-build/$FOOTPRINT_NAME
+}
+
+clone_branch(){
+    cd /tmp && rm -rf $FINGERPRINT;
+    git clone -b "$BRANCH" "$REPO_LINK" "$FINGERPRINT" && cd "$FINGERPRINT" || exit
+    ls
+    git checkout "$COMMIT"
+}
+
+random_generator(){
+    awk -v min=10000000 -v max=99999999 'BEGIN{srand(); print int(min+rand()*(max-min+1))}'
 }
 
 build_message Preparing builds...

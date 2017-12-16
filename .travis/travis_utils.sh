@@ -17,8 +17,12 @@ prepare_package(){
 	DOCKER_ORG=treehouses
 	DOCKER_REPO=moodle
 	VERSION=$(cat package.json | grep version | awk '{print$2}' | awk '{print substr($0, 2, length($0) - 3)}')
-	BRANCH=$TRAVIS_BRANCH
-	COMMIT=${TRAVIS_COMMIT::8}
+	if [ -z "$BRANCH" ]; then
+		BRANCH=$TRAVIS_BRANCH
+	fi
+	if [ -z "$COMMIT" ]; then
+		COMMIT=${TRAVIS_COMMIT::8}
+	fi
 	X86_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
 	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
 	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
