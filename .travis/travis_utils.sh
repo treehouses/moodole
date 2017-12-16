@@ -14,15 +14,29 @@ login_docker(){
 }
 
 prepare_package(){
-	export DOCKER_ORG=treehouses
-	export DOCKER_REPO=moodle
-	export VERSION=$(cat package.json | grep version | awk '{print$2}' | awk '{print substr($0, 2, length($0) - 3)}')
-	export BRANCH=$TRAVIS_BRANCH
-	export COMMIT=${TRAVIS_COMMIT::8}
-	export X86_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
-	export X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
-	export ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
-	export ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
+	DOCKER_ORG=treehouses
+	DOCKER_REPO=moodle
+	VERSION=$(cat package.json | grep version | awk '{print$2}' | awk '{print substr($0, 2, length($0) - 3)}')
+	BRANCH=$TRAVIS_BRANCH
+	COMMIT=${TRAVIS_COMMIT::8}
+	X86_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
+	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
+	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
+	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
+}
+
+clone_branch(){
+    cd /tmp && rm -rf $FINGERPRINT;
+    git clone -b "$branch" "$REPO_LINK" "$FINGERPRINT" && cd "$FINGERPRINT" || exit
+    git checkout "$commit"
+}
+
+remove_temporary_folders(){
+	rm -rf "$TEST_DIRECTORY"
+}
+
+create_footprint_moodole() {
+  echo $(date +%Y-%m-%d.%H-%M-%S) from moodole >> $FOOTPRINT
 }
 
 package_x86(){
