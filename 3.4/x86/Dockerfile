@@ -15,6 +15,7 @@ RUN wget -O /var/www/moodle-${version}.tar.gz https://github.com/moodle/moodle/a
 	rm -rf /var/www/html/ && \
 	cd /var/www && tar xvf moodle-${version}.tar.gz && \
 	mv /var/www/moodle-${version} /var/www/html && \
+	rm  moodle-${version}.tar.gz && \
 	chown -R www-data:www-data /var/www/html && \
 	chmod +x /etc/apache2/start.sh && \
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
