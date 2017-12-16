@@ -7,4 +7,7 @@ prepare_package
 
 build_message Build x86 image started...
 deploy_x86
-build_message Buil x86 image finished, check build result!
+build_message Build x86 image finished, check build result!
+
+build_message Now building for ARM...
+ssh -i ./.travis/deploy_rsa -o StrictHostKeyChecking=no -p 22 travis@kraken.ole.org 'bash -s' -- < ./.travis/deploy_docker_rpi.sh  --branch="$BRANCH" --commit="$COMMIT" --duser="$DOCKER_USER" --dpass="$DOCKER_PASS"
