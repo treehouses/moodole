@@ -10,7 +10,7 @@ ADD ./start.sh /etc/nginx/
 ADD ./moodle /etc/nginx/site-available
 
 RUN apt-get update && \
-	apt-get install \
+	apt-get -y install \
 	nginx php-fpm php-common \
 	php-mbstring php-xmlrpc \
 	php-soap php-gd php-xml \
