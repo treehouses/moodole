@@ -1,15 +1,50 @@
 #!bin/bash
 
-source /etc/apache2/envvars
+# populate environment first
 
-if [ ! -z "${MOODOLE_POST_MAX_SIZE}" ]
+# /etc/nginx/sites-available/moodle
+NGINX_CONFIG="/etc/nginx/sites-available/moodle"
+
+if [ ! -z "${MOODOLE_MAX_BODY_SIZE}" ]
 then
-  sed -i '/post_max_size/c\post_max_size = '$MOODOLE_POST_MAX_SIZE /etc/php/7.0/apache2/php.ini
+  sed -i '/client_max_body_size/c\\tclient_max_body_size '$MOODOLE_MAX_BODY_SIZE';' $NGINX_CONFIG
 fi
 
-if [ ! -z "${MOODOLE_UPLOAD_MAX_FILESIZE}" ]
+if [ ! -z "${MOODOLE_BODY_TIMEOUT}" ]
 then
-  sed -i '/upload_max_filesize/c\upload_max_filesize = '$MOODOLE_UPLOAD_MAX_FILESIZE /etc/php/7.0/apache2/php.ini
+  sed -i '/client_body_timeout/c\\tclient_body_timeout '$MOODOLE_BODY_TIMEOUT';' $NGINX_CONFIG
 fi
 
-exec apache2 -D FOREGROUND
+# /etc/php/7.0/fpm/php-fpm.conf
+PHP_FM_CONFIG="/etc/php/7.0/fpm/php-fpm.conf"
+echo "[www]" >> $PHP_FM_CONFIG
+
+if [ ! -z "${MOODOLE_DB_URL}" ]
+then
+  echo "env[MOODOLE_DB_URL] = '$MOODOLE_DB_URL'" >> $PHP_FM_CONFIG
+fi
+
+if [ ! -z "${MOODOLE_DB_NAME}" ]
+then
+  echo "env[MOODOLE_DB_NAME] = '$MOODOLE_DB_NAME'" >> $PHP_FM_CONFIG
+fi
+
+if [ ! -z "${MOODOLE_DB_USER}" ]
+then
+  echo "env[MOODOLE_DB_USER] = '$MOODOLE_DB_USER'" >> $PHP_FM_CONFIG
+fi
+
+if [ ! -z "${MOODOLE_DB_PASS}" ]
+then
+  echo "env[MOODOLE_DB_PASS] = '$MOODOLE_DB_PASS'" >> $PHP_FM_CONFIG
+fi
+
+if [ ! -z "${MOODOLE_DB_PORT}" ]
+then
+  echo "env[MOODOLE_DB_PORT] = '$MOODOLE_DB_PORT'" >> $PHP_FM_CONFIG
+fi
+
+service php7.0-fpm start
+service nginx start
+
+tail -f /var/log/nginx/access.log
