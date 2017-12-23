@@ -14,7 +14,7 @@ services:
     ports:
       - "80:80"
     environment:
-    - MOODOLE_DB_URL=moodledb
+    - MOODOLE_DB_URL=moodledb_rpi
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
     - MOODOLE_DB_PASS=moodle
