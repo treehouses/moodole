@@ -23,20 +23,18 @@ services:
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
   moodle:
-    image: treehouses/moodle:latest
+    build: .
     container_name: moodle
     ports:
       - "80:80"
-    volumes:
-    - /home/pi/apache2:/var/run/apache2
     environment:
     - MOODOLE_DB_URL=moodledb
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
     - MOODOLE_DB_PASS=moodle
     - MOODOLE_DB_PORT=5432
-    - MOODOLE_POST_MAX_SIZE=200M
-    - MOODOLE_UPLOAD_MAX_FILESIZE=200M
+    - MOODOLE_MAX_BODY_SIZE=300M
+    - MOODOLE_BODY_TIMEOUT=700s
 ```
 
 ---
