@@ -1,7 +1,5 @@
 #!bin/bash
 
-source /etc/apache2/envvars
-
 if [ ! -z "${MOODOLE_POST_MAX_SIZE}" ]
 then
   sed -i '/post_max_size/c\post_max_size = '$MOODOLE_POST_MAX_SIZE /etc/php/7.0/apache2/php.ini
@@ -12,4 +10,7 @@ then
   sed -i '/upload_max_filesize/c\upload_max_filesize = '$MOODOLE_UPLOAD_MAX_FILESIZE /etc/php/7.0/apache2/php.ini
 fi
 
-exec apache2 -D FOREGROUND
+service php7.0-fpm start
+service nginx start
+
+tail -f /var/log/nginx/access.log
