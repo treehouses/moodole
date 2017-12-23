@@ -32,7 +32,8 @@ RUN mkdir -p /var/www/html && \
 	chmod +x /etc/nginx/start.sh && \
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
 	chown -R www-data:www-data /var/www/moodledata && \
-	ln -s /etc/nginx/sites-available/moodle /etc/nginx/sites-enabled/
+	ln -s /etc/nginx/sites-available/moodle /etc/nginx/sites-enabled/ && \
+	unlink /etc/nginx/sites-enabled/default
 
 ADD ./config.php /var/www/html/
 
