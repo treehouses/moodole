@@ -35,4 +35,4 @@ RUN mkdir -p /var/www/html && \
 
 ADD ./config.php /var/www/html/
 
-CMD ["/etc/apache2/start.sh"]
+CMD ["/etc/nginx/start.sh"]

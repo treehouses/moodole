@@ -9,12 +9,12 @@ services:
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
   moodle:
-    image: treehouses/moodle:latest
+    image: treehouses/moodle:0.0.1-nginx-46e4bf46
     container_name: moodle
     ports:
       - "80:80"
-    volumes:
-    - /home/pi/apache2:/var/run/apache2
+    # volumes:
+    # - /home/pi/apache2:/var/run/apache2
     environment:
     - MOODOLE_DB_URL=moodledb
     - MOODOLE_DB_NAME=moodle
