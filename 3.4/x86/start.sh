@@ -7,12 +7,12 @@ NGINX_CONFIG="/etc/nginx/sites-available/moodle"
 
 if [ ! -z "${MOODOLE_MAX_BODY_SIZE}" ]
 then
-  sed -i '/client_max_body_size/c\client_max_body_size '$MOODOLE_MAX_BODY_SIZE';' $NGINX_CONFIG
+  sed -i '/client_max_body_size/c\\tclient_max_body_size '$MOODOLE_MAX_BODY_SIZE';' $NGINX_CONFIG
 fi
 
 if [ ! -z "${MOODOLE_BODY_TIMEOUT}" ]
 then
-  sed -i '/client_body_timeout/c\client_body_timeout '$MOODOLE_BODY_TIMEOUT';' $NGINX_CONFIG
+  sed -i '/client_body_timeout/c\\tclient_body_timeout '$MOODOLE_BODY_TIMEOUT';' $NGINX_CONFIG
 fi
 
 # /etc/php/7.0/fpm/php-fpm.conf
