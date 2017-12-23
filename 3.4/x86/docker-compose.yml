@@ -13,8 +13,8 @@ services:
     container_name: moodle
     ports:
       - "80:80"
-    volumes:
-    - /home/pi/apache2:/var/run/apache2
+    # volumes:
+    # - /home/pi/apache2:/var/run/apache2
     environment:
     - MOODOLE_DB_URL=moodledb
     - MOODOLE_DB_NAME=moodle
