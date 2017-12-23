@@ -7,7 +7,7 @@ ENV version '3.4.0'
 EXPOSE 80
 
 ADD ./start.sh /etc/nginx/
-ADD ./moodle /etc/nginx/site-available/
+COPY ./moodle /etc/nginx/site-available/moodle
 
 RUN apt-get update && \
 	apt-get -y install \
