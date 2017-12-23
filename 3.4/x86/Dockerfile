@@ -7,7 +7,7 @@ ENV version '3.4.0'
 EXPOSE 80
 
 ADD ./start.sh /etc/nginx/
-ADD ./moodle /etc/nginx/site-available
+ADD ./moodle /etc/nginx/site-available/
 
 RUN apt-get update && \
 	apt-get -y install \
@@ -31,7 +31,8 @@ RUN mkdir -p /var/www/html && \
 	chown -R www-data:www-data /var/www/html && \
 	chmod +x /etc/nginx/start.sh && \
 	mkdir -p /var/www/moodledata && chmod 777 /var/www/moodledata && \
-	chown -R www-data:www-data /var/www/moodledata
+	chown -R www-data:www-data /var/www/moodledata && \
+	ln -s /etc/nginx/sites-available/moodle /etc/nginx/sites-enabled/
 
 ADD ./config.php /var/www/html/
 
