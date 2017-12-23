@@ -15,7 +15,8 @@ RUN apt-get update && \
 	php-mbstring php-xmlrpc \
 	php-soap php-gd php-xml \
 	php-intl php-pgsql php-mysqlnd php-cli \
-	php-mcrypt php-ldap php-zip php-curl && \
+	php-mcrypt php-ldap php-zip php-curl \
+	wget && \
 	apt-get -y autoclean && \
 	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
