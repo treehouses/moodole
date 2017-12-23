@@ -1,6 +1,7 @@
 FROM debian:stretch-slim
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 LABEL MAINTAINER "Abdurrachman Mappuji <mappuji@ole.org>"
+LABEL MAINTAINER "dogi <stefan@unterhauser.name>"
 
 ENV version '3.4.0'
 
@@ -23,7 +24,7 @@ RUN apt-get update && \
 
 RUN mkdir -p /var/www/html && \
     wget -O /var/www/moodle-${version}.tar.gz \
-    	https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
+		https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
 	rm -rf /var/www/html/ && \
 	cd /var/www && tar xvf moodle-${version}.tar.gz && \
 	mv /var/www/moodle-${version} /var/www/html && \

@@ -1,1 +1,1 @@
-docker build . -t treehouses/moodle:x86-pgsql
+docker build . -t treehouses/moodle:latest

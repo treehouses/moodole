@@ -1,1 +1,1 @@
-docker build . -t treehouses/moodle:rpi-pgsql
+docker build . -t treehouses/moodle:rpi-latest
