@@ -12,7 +12,6 @@ services:
     container_name: moodle_alpine
     ports:
       - "80:80"
-    tty: true
     environment:
       - MOODOLE_DB_URL=moodledb_alpine
       - MOODOLE_DB_NAME=moodle

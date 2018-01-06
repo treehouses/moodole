@@ -25,7 +25,7 @@ RUN mkdir -p /var/lib/nginx/html && \
     https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
     cd /var/lib/nginx && tar -xvzf moodle-${version}.tar.gz && \
 	mv /var/lib/nginx/moodle-${version}/* /var/lib/nginx/html/ && \
-    rm  moodle-${version}.tar.gz && rm /var/lib/nginx/moodle-${version} &&\
+    rm moodle-${version}.tar.gz && rm -rf /var/lib/nginx/moodle-${version} && \
     chmod +x /etc/nginx/start.sh && \
 	mkdir -p /var/lib/nginx/moodledata && chmod 777 /var/lib/nginx/moodledata && \
 	chown -R nginx:nginx /var/lib/nginx/moodledata && \
