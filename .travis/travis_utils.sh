@@ -89,12 +89,10 @@ deploy_x86(){
 	login_docker
 	package_x86
 	push_x86
-	docker logout
 }
 
 deploy_arm(){
 	login_docker
 	package_arm
 	push_arm
-	docker logout
 }
