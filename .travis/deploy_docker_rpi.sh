@@ -42,7 +42,7 @@ prepare_package_arm(){
 	RANDOM_FINGERPRINT=$(random_generator)
 	FINGERPRINT="moodole-$RANDOM_FINGERPRINT"
 	TEST_DIRECTORY=/tmp/"$FINGERPRINT"
-	REPO_LINK="https://github.com/ole-vi/moodole.git"
+	REPO_LINK="https://github.com/treehouses/moodole.git"
 	FOOTPRINT_NAME=$VERSION-$BRANCH-$COMMIT
 	FOOTPRINT=~/travis-build/$FOOTPRINT_NAME
 }

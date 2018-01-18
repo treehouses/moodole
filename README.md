@@ -1,6 +1,6 @@
 # moodole
 
-[![Build Status](https://travis-ci.org/ole-vi/moodole.svg?branch=master)](https://travis-ci.org/ole-vi/moodole)
+[![Build Status](https://travis-ci.org/treehouses/moodole.svg?branch=master)](https://travis-ci.org/treehouses/moodole)
 
 Moodle Docker for Raspberry Pi
 
