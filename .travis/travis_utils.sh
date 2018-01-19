@@ -25,6 +25,8 @@ prepare_package(){
 	fi
 	X86_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
 	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
+	X86_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:alpine-$VERSION-$BRANCH-$COMMIT
+	X86_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:alpine-latest
 	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
 	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
 }
@@ -46,6 +48,18 @@ package_x86(){
 		build_message processing $X86_DOCKER_NAME_LATEST
 		docker tag $X86_DOCKER_NAME $X86_DOCKER_NAME_LATEST
 		build_message done processing $X86_DOCKER_NAME_LATEST
+	fi
+}
+
+package_x86_alpine(){
+	build_message processing $X86_DOCKER_ALPINE_NAME
+	docker build 3.4/x86_alpine/ -t $X86_DOCKER_ALPINE_NAME
+	build_message done processing $X86_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message processing $X86_DOCKER_ALPINE_NAME_LATEST
+		docker tag $X86_DOCKER_ALPINE_NAME $X86_DOCKER_ALPINE_NAME_LATEST
+		build_message done processing $X86_DOCKER_ALPINE_NAME_LATEST
 	fi
 }
 
@@ -73,6 +87,18 @@ push_x86(){
 	fi
 }
 
+push_x86_alpine(){
+	build_message pushing $X86_DOCKER_ALPINE_NAME
+	docker push $X86_DOCKER_ALPINE_NAME
+	build_message done pushing $X86_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message pushing $X86_DOCKER_ALPINE_NAME_LATEST
+		docker push $X86_DOCKER_ALPINE_NAME_LATEST
+		build_message done pushing $X86_DOCKER_ALPINE_NAME_LATEST
+	fi
+}
+
 push_arm(){
 	build_message pushing $ARM_DOCKER_NAME
 	docker push $ARM_DOCKER_NAME
@@ -89,12 +115,16 @@ deploy_x86(){
 	login_docker
 	package_x86
 	push_x86
-	docker logout
+}
+
+deploy_x86_alpine(){
+	login_docker
+	package_x86_alpine
+	push_x86_alpine
 }
 
 deploy_arm(){
 	login_docker
 	package_arm
 	push_arm
-	docker logout
 }
