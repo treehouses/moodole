@@ -32,6 +32,7 @@ RUN mkdir -p /var/lib/nginx/html && \
     chmod -R 775 /var/lib/nginx/html && \
     chown -R nginx:nginx /var/lib/nginx/html && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
+    sed -i '/http {/ a \\taccess_log /dev/stdout;' /etc/nginx/nginx.conf && \
     sed -i 's/user = nobody/user = nginx/g' /etc/php7/php-fpm.d/www.conf && \
     sed -i 's/^group = nobody/group = nginx/g' /etc/php7/php-fpm.d/www.conf && \
     sed -i 's/;listen.owner = nobody/listen.owner = nginx/g' /etc/php7/php-fpm.d/www.conf && \
@@ -42,8 +43,7 @@ RUN mkdir -p /var/lib/nginx/html && \
     sed -i 's/post_max_size = 8M/post_max_size = 200M/g' /etc/php7/php.ini && \
     mkdir -p /run/nginx && \
     ln -s /etc/nginx/sites-available/moodle.conf /etc/nginx/conf.d/moodle.conf && \
-	unlink /etc/nginx/conf.d/default.conf && \
-    ln -sf /dev/stdout /var/log/nginx/access.log
+	unlink /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
