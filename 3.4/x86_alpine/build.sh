@@ -1,1 +1,1 @@
-docker build . -t treehouses/moodle-alpine:latest
+docker build . -t treehouses/moodle:alpine-latest
