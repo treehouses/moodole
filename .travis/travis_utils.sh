@@ -123,7 +123,7 @@ deploy_arm(){
 	push_arm
 }
 
-deploy_arm_ALPINE(){
+deploy_arm_alpine(){
 	login_docker
 	package_arm_alpine
 	push_arm_alpine
