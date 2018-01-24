@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 version: '2'
 services:
   moodledb_alpine_arm:
@@ -21,4 +20,3 @@ services:
       - MOODOLE_DB_PORT=5432
       - MOODOLE_MAX_BODY_SIZE=200M
       - MOODOLE_BODY_TIMEOUT=300s
-

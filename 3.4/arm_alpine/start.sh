@@ -1,6 +1,5 @@
 #!bin/sh
 
-<<<<<<< HEAD
 # /etc/nginx/sites-available/moodle
 NGINX_CONFIG="/etc/nginx/sites-available/moodle.conf"
 
@@ -48,4 +47,3 @@ fi
 /usr/sbin/nginx
 
 tail -f /var/log/nginx/access.log
-
