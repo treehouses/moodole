@@ -27,6 +27,8 @@ prepare_package(){
 	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
 	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
 	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
+	ARM_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-$VERSION-$BRANCH-$COMMIT
+	ARM_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-latest
 }
 
 remove_temporary_folders(){
@@ -61,6 +63,18 @@ package_arm(){
 	fi
 }
 
+package_arm_alpine(){
+	build_message processing $ARM_DOCKER_ALPINE_NAME
+	docker build 3.4/arm_alpine/ -t $ARM_DOCKER_ALPINE_NAME
+	build_message done processing $ARM_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message processing $ARM_DOCKER_ALPINE_NAME_LATEST
+		docker tag $ARM_DOCKER_ALPINE_NAME $ARM_DOCKER_ALPINE_NAME_LATEST
+		build_message done processing $ARM_DOCKER_ALPINE_NAME_LATEST
+	fi
+}
+
 push_x86(){
 	build_message pushing $X86_DOCKER_NAME
 	docker push $X86_DOCKER_NAME
@@ -85,6 +99,18 @@ push_arm(){
 	fi
 }
 
+push_arm_alpine(){
+	build_message pushing $ARM_DOCKER_ALPINE_NAME
+	docker push $ARM_DOCKER_ALPINE_NAME
+	build_message done pushing $ARM_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message pushing $ARM_DOCKER_ALPINE_NAME_LATEST
+		docker push $ARM_DOCKER_ALPINE_NAME_LATEST
+		build_message done pushing $ARM_DOCKER_ALPINE_NAME_LATEST
+	fi
+}
+
 deploy_x86(){
 	login_docker
 	package_x86
@@ -95,4 +121,10 @@ deploy_arm(){
 	login_docker
 	package_arm
 	push_arm
+}
+
+deploy_arm_ALPINE(){
+	login_docker
+	package_arm_alpine
+	push_arm_alpine
 }

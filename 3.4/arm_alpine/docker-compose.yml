@@ -11,7 +11,7 @@ services:
     build: .
     container_name: moodle_alpine_arm
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       - MOODOLE_DB_URL=moodledb_alpine
       - MOODOLE_DB_NAME=moodle

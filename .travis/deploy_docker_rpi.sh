@@ -76,6 +76,10 @@ build_message Build ARM image started...
 deploy_arm
 build_message Buil ARM image finished, check build result!
 
+build_message Build ARM Alpine image started...
+deploy_arm_alpine
+build_message Buil ARM Alpine image finished, check build result!
+
 build_message Peform postconditions on build machine..
 remove_temporary_folders
 create_footprint_moodole
