@@ -1,20 +1,20 @@
 version: '2'
 services:
-  moodledb:
-    image: postgres
-    container_name: moodledb
+  moodledb_rpi_alpine:
+    image: arm32v7/postgres
+    container_name: moodledb_rpi_alpine
     environment:
     # MAKE SURE THIS ONE SAME WITH THE MOODLE
     - POSTGRES_DATABASE=moodle
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
-  moodle:
+  moodle_rpi_alpine:
     image: treehouses/moodle:rpi-alpine-latest
-    container_name: moodle
+    container_name: moodle_rpi_alpine
     ports:
       - "80:80"
     environment:
-    - MOODOLE_DB_URL=moodledb
+    - MOODOLE_DB_URL=moodledb_rpi_alpine
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
     - MOODOLE_DB_PASS=moodle
