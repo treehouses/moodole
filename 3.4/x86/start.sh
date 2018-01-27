@@ -44,6 +44,8 @@ then
   echo "env[MOODOLE_DB_PORT] = '$MOODOLE_DB_PORT'" >> $PHP_FM_CONFIG
 fi
 
+envsubst '$NGINX_PORT' < $NGINX_CONFIG.template > $NGINX_CONFIG
+
 service php7.0-fpm start
 service nginx start
 

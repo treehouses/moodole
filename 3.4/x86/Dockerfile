@@ -8,7 +8,7 @@ ENV version '3.4.0'
 EXPOSE 80
 
 ADD ./start.sh /etc/nginx/
-COPY ./moodle /etc/nginx/sites-available/moodle
+COPY ./moodle /etc/nginx/sites-available/moodle.template
 
 RUN apt-get update && \
 	apt-get -y install \
@@ -17,7 +17,7 @@ RUN apt-get update && \
 	php-soap php-gd php-xml \
 	php-intl php-pgsql php-mysqlnd php-cli \
 	php-mcrypt php-ldap php-zip php-curl \
-	wget && \
+	wget gettext-base && \
 	apt-get -y autoclean && \
 	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
