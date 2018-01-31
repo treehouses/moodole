@@ -58,6 +58,7 @@ services:
     ports:
       - "80:80"
     environment:
+    - NGINX_PORT=80
     - MOODOLE_DB_URL=moodledb
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
@@ -88,6 +89,7 @@ services:
     ports:
       - "80:80"
     environment:
+    - NGINX_PORT=80
     - MOODOLE_DB_URL=moodledb
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
@@ -118,6 +120,7 @@ services:
     ports:
       - "80:80"
     environment:
+    - NGINX_PORT=80
     - MOODOLE_DB_URL=moodledb_rpi
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
@@ -148,6 +151,7 @@ services:
     ports:
       - "80:80"
     environment:
+    - NGINX_PORT=80
     - MOODOLE_DB_URL=moodledb_rpi_alpine
     - MOODOLE_DB_NAME=moodle
     - MOODOLE_DB_USER=moodle
