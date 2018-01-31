@@ -4,6 +4,12 @@
 
 # /etc/nginx/sites-available/moodle
 NGINX_CONFIG="/etc/nginx/sites-available/moodle"
+DEFAULT_PORT=80
+
+if [ -z "$NGINX_PORT" ]
+then
+    NGINX_PORT="$DEFAULT_PORT"
+fi
 envsubst '$NGINX_PORT' < $NGINX_CONFIG.template > $NGINX_CONFIG
 
 if [ ! -z "${MOODOLE_MAX_BODY_SIZE}" ]
