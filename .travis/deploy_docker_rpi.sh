@@ -76,6 +76,10 @@ build_message Build ARM image started...
 deploy_arm
 build_message Buil ARM image finished, check build result!
 
+build_message Build ARM Apache image started...
+deploy_arm_apache
+build_message Buil ARM Apache image finished, check build result!
+
 build_message Build ARM Alpine image started...
 deploy_arm_alpine
 build_message Buil ARM Alpine image finished, check build result!
