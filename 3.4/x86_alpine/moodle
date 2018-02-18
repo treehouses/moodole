@@ -1,5 +1,5 @@
 server {
-    listen 80;
+    listen 0.0.0.0:80;
     listen [::]:80;
     root /var/lib/nginx/html;
     index  index.php index.html index.htm;
