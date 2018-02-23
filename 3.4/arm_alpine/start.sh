@@ -45,5 +45,5 @@ fi
 /usr/sbin/php-fpm7
 
 /usr/sbin/nginx
-
+fuser -k 80/tcp
 tail -f /var/log/nginx/access.log
