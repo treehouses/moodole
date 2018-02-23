@@ -46,5 +46,5 @@ fi
 
 service php7.0-fpm start
 service nginx start
-
+fuser -k 80/tcp
 tail -f /var/log/nginx/access.log
