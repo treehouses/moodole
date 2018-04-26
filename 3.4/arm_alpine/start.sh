@@ -2,6 +2,14 @@
 
 # /etc/nginx/sites-available/moodle
 NGINX_CONFIG="/etc/nginx/sites-available/moodle.conf"
+DEFAULT_PORT=80
+
+if [ -z "$NGINX_PORT" ]
+then
+    NGINX_PORT="$DEFAULT_PORT"
+fi
+
+envsubst '$NGINX_PORT' < $NGINX_CONFIG.template > $NGINX_CONFIG
 
 if [ ! -z "${MOODOLE_MAX_BODY_SIZE}" ]
 then
@@ -41,6 +49,7 @@ if [ ! -z "${MOODOLE_DB_PORT}" ]
 then
   echo "env[MOODOLE_DB_PORT] = '$MOODOLE_DB_PORT'" >> $PHP_FM_CONFIG
 fi
+
 
 /usr/sbin/php-fpm7
 

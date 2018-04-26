@@ -1,6 +1,6 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen ${NGINX_PORT};
+    listen [::]:${NGINX_PORT};
     root /var/lib/nginx/html;
     index  index.php index.html index.htm;
     server_name _;

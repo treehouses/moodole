@@ -5,10 +5,10 @@ LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 ENV version '3.4.0'
 
 ADD ./start.sh /etc/nginx/start.sh
-COPY ./moodle /etc/nginx/sites-available/moodle.conf
+COPY ./moodle /etc/nginx/sites-available/moodle.conf.template
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache wget unzip nginx \
+    apk add --no-cache gettext libintl wget unzip nginx \
     php7 php7-fpm php7-common \
     postgresql-dev php7-opcache php7-pgsql php7-xmlrpc \
     php7-gd php7-intl php7-session php7-json \
