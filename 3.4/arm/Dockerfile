@@ -1,9 +1,8 @@
-FROM resin/rpi-raspbian
-
+FROM multiarch/ubuntu-core:armhf-xenial
+LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 LABEL MAINTAINER "Abdurrachman Mappuji <mappuji@ole.org>"
 LABEL MAINTAINER "dogi <stefan@unterhauser.name>"
-LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 
 ENV version '3.4.0'
 

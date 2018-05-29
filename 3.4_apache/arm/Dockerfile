@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian
+FROM multiarch/ubuntu-core:armhf-xenial
 LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
