@@ -132,7 +132,7 @@ package_arm_alpine(){
 	fi
 }
 
-ackage_arm64(){
+package_arm64(){
 	build_message processing $ARM64_DOCKER_NAME
 	docker build 3.4/arm64/ -t $ARM64_DOCKER_NAME
 	build_message done processing $ARM64_DOCKER_NAME
