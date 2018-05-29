@@ -24,17 +24,24 @@ prepare_package(){
 		COMMIT=${TRAVIS_COMMIT::8}
 	fi
 	AMD64_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
-	AMD64_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
-	AMD64_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:apache-$VERSION-$BRANCH-$COMMIT
-	AMD64_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:apache-latest
-	AMD64_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:alpine-$VERSION-$BRANCH-$COMMIT
-	AMD64_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:alpine-latest
-	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
-	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
-	ARM_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-apache-$VERSION-$BRANCH-$COMMIT
-	ARM_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-apache-latest
-	ARM_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-$VERSION-$BRANCH-$COMMIT
-	ARM_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-latest
+	AMD64_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:amd64-latest
+	AMD64_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:amd64-apache-$VERSION-$BRANCH-$COMMIT
+	AMD64_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:amd64-apache-latest
+	AMD64_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:amd64-alpine-$VERSION-$BRANCH-$COMMIT
+	AMD64_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:amd64-alpine-latest
+	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:arm-$VERSION-$BRANCH-$COMMIT
+	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm-latest
+	ARM_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:arm-apache-$VERSION-$BRANCH-$COMMIT
+	ARM_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm-apache-latest
+	ARM_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:arm-alpine-$VERSION-$BRANCH-$COMMIT
+	ARM_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm-alpine-latest	
+	ARM64_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:arm64-$VERSION-$BRANCH-$COMMIT
+	ARM64_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm64-latest
+	ARM64_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:arm64-apache-$VERSION-$BRANCH-$COMMIT
+	ARM64_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm64-apache-latest
+	ARM64_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:arm64-alpine-$VERSION-$BRANCH-$COMMIT
+	ARM64_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm64-alpine-latest
+	
 }
 
 package_amd64(){
@@ -106,6 +113,42 @@ package_arm_alpine(){
 		build_message processing $ARM_DOCKER_ALPINE_NAME_LATEST
 		docker tag $ARM_DOCKER_ALPINE_NAME $ARM_DOCKER_ALPINE_NAME_LATEST
 		build_message done processing $ARM_DOCKER_ALPINE_NAME_LATEST
+	fi
+}
+
+ackage_arm64(){
+	build_message processing $ARM64_DOCKER_NAME
+	docker build 3.4/arm64/ -t $ARM64_DOCKER_NAME
+	build_message done processing $ARM64_DOCKER_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message processing $ARM64_DOCKER_NAME_LATEST
+		docker tag $ARM64_DOCKER_NAME $ARM64_DOCKER_NAME_LATEST
+		build_message done processing $ARM64_DOCKER_NAME_LATEST
+	fi
+}
+
+package_arm64_apache(){
+	build_message processing $ARM64_DOCKER_APACHE_NAME
+	docker build 3.4/arm64/ -t $ARM64_DOCKER_APACHE_NAME
+	build_message done processing $ARM64_DOCKER_APACHE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message processing $ARM64_DOCKER_APACHE_NAME_LATEST
+		docker tag $ARM64_DOCKER_APACHE_NAME $ARM64_DOCKER_APACHE_NAME_LATEST
+		build_message done processing $ARM64_DOCKER_APACHE_NAME_LATEST
+	fi
+}
+
+package_arm64_alpine(){
+	build_message processing $ARM64_DOCKER_ALPINE_NAME
+	docker build 3.4/arm64_alpine/ -t $ARM64_DOCKER_ALPINE_NAME
+	build_message done processing $ARM64_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message processing $ARM64_DOCKER_ALPINE_NAME_LATEST
+		docker tag $ARM64_DOCKER_ALPINE_NAME $ARM64_DOCKER_ALPINE_NAME_LATEST
+		build_message done processing $ARM64_DOCKER_ALPINE_NAME_LATEST
 	fi
 }
 
@@ -181,6 +224,42 @@ push_arm_alpine(){
 	fi
 }
 
+push_arm64(){
+	build_message pushing $ARM64_DOCKER_NAME
+	docker push $ARM64_DOCKER_NAME
+	build_message done pushing $ARM64_DOCKER_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message pushing $ARM64_DOCKER_NAME_LATEST
+		docker push $ARM64_DOCKER_NAME_LATEST
+		build_message done pushing $ARM64_DOCKER_NAME_LATEST
+	fi
+}
+
+push_arm64_apache(){
+	build_message pushing $ARM64_DOCKER_APACHE_NAME
+	docker push $ARM64_DOCKER_APACHE_NAME
+	build_message done pushing $ARM64_DOCKER_APACHE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message pushing $ARM64_DOCKER_APACHE_NAME_LATEST
+		docker push $ARM64_DOCKER_APACHE_NAME_LATEST
+		build_message done pushing $ARM64_DOCKER_APACHE_NAME_LATEST
+	fi
+}
+
+push_arm64_alpine(){
+	build_message pushing $ARM64_DOCKER_ALPINE_NAME
+	docker push $ARM64_DOCKER_ALPINE_NAME
+	build_message done pushing $ARM64_DOCKER_ALPINE_NAME
+	if [ "$BRANCH" = "master" ]
+	then
+		build_message pushing $ARM64_DOCKER_ALPINE_NAME_LATEST
+		docker push $ARM64_DOCKER_ALPINE_NAME_LATEST
+		build_message done pushing $ARM64_DOCKER_ALPINE_NAME_LATEST
+	fi
+}
+
 deploy_amd64(){
 	login_docker
 	package_amd64
@@ -215,4 +294,22 @@ deploy_arm_alpine(){
 	login_docker
 	package_arm_alpine
 	push_arm_alpine
+}
+
+deploy_arm64(){
+	login_docker
+	package_arm64
+	push_arm64
+}
+
+deploy_arm64_apache(){
+	login_docker
+	package_arm64_apache
+	push_arm64_apache
+}
+
+deploy_arm64_alpine(){
+	login_docker
+	package_arm64_alpine
+	push_arm64_alpine
 }

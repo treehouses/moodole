@@ -54,12 +54,24 @@ prepare_package
 
 build_message Build ARM image started...
 deploy_arm
-build_message Buil ARM image finished, check build result!
+build_message Build ARM image finished, check build result!
 
 build_message Build ARM Apache image started...
 deploy_arm_apache
-build_message Buil ARM Apache image finished, check build result!
+build_message Build ARM Apache image finished, check build result!
 
 build_message Build ARM Alpine image started...
 deploy_arm_alpine
-build_message Buil ARM Alpine image finished, check build result!
+build_message Build ARM Alpine image finished, check build result!
+
+build_message Build ARM64 image started...
+deploy_arm64
+build_message Build ARM64 image finished, check build result!
+
+build_message Build ARM64 Apache image started...
+deploy_arm64_apache
+build_message Build ARM64 Apache image finished, check build result!
+
+build_message Build ARM64 Alpine image started...
+deploy_arm64_alpine
+build_message Build ARM64 Alpine image finished, check build result!
