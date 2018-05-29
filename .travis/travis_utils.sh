@@ -64,7 +64,7 @@ package_amd64(){
 	build_message processing $AMD64_DOCKER_NAME
 	docker build 3.4/amd64/ -t $AMD64_DOCKER_NAME
 	build_message done processing $AMD64_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $AMD64_DOCKER_NAME_LATEST
 		docker tag $AMD64_DOCKER_NAME $AMD64_DOCKER_NAME_LATEST
@@ -76,7 +76,7 @@ package_amd64_apache(){
 	build_message processing $AMD64_DOCKER_APACHE_NAME
 	docker build 3.4_apache/amd64/ -t $AMD64_DOCKER_APACHE_NAME
 	build_message done processing $AMD64_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $AMD64_DOCKER_APACHE_NAME_LATEST
 		docker tag $AMD64_DOCKER_APACHE_NAME $AMD64_DOCKER_APACHE_NAME_LATEST
@@ -88,7 +88,7 @@ package_amd64_alpine(){
 	build_message processing $AMD64_DOCKER_ALPINE_NAME
 	docker build 3.4/amd64_alpine/ -t $AMD64_DOCKER_ALPINE_NAME
 	build_message done processing $AMD64_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $AMD64_DOCKER_ALPINE_NAME_LATEST
 		docker tag $AMD64_DOCKER_ALPINE_NAME $AMD64_DOCKER_ALPINE_NAME_LATEST
@@ -100,7 +100,7 @@ package_arm(){
 	build_message processing $ARM_DOCKER_NAME
 	docker build 3.4/arm/ -t $ARM_DOCKER_NAME
 	build_message done processing $ARM_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM_DOCKER_NAME_LATEST
 		docker tag $ARM_DOCKER_NAME $ARM_DOCKER_NAME_LATEST
@@ -112,7 +112,7 @@ package_arm_apache(){
 	build_message processing $ARM_DOCKER_APACHE_NAME
 	docker build 3.4/arm/ -t $ARM_DOCKER_APACHE_NAME
 	build_message done processing $ARM_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM_DOCKER_APACHE_NAME_LATEST
 		docker tag $ARM_DOCKER_APACHE_NAME $ARM_DOCKER_APACHE_NAME_LATEST
@@ -124,7 +124,7 @@ package_arm_alpine(){
 	build_message processing $ARM_DOCKER_ALPINE_NAME
 	docker build 3.4/arm_alpine/ -t $ARM_DOCKER_ALPINE_NAME
 	build_message done processing $ARM_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM_DOCKER_ALPINE_NAME_LATEST
 		docker tag $ARM_DOCKER_ALPINE_NAME $ARM_DOCKER_ALPINE_NAME_LATEST
@@ -136,7 +136,7 @@ package_arm64(){
 	build_message processing $ARM64_DOCKER_NAME
 	docker build 3.4/arm64/ -t $ARM64_DOCKER_NAME
 	build_message done processing $ARM64_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM64_DOCKER_NAME_LATEST
 		docker tag $ARM64_DOCKER_NAME $ARM64_DOCKER_NAME_LATEST
@@ -148,7 +148,7 @@ package_arm64_apache(){
 	build_message processing $ARM64_DOCKER_APACHE_NAME
 	docker build 3.4/arm64/ -t $ARM64_DOCKER_APACHE_NAME
 	build_message done processing $ARM64_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM64_DOCKER_APACHE_NAME_LATEST
 		docker tag $ARM64_DOCKER_APACHE_NAME $ARM64_DOCKER_APACHE_NAME_LATEST
@@ -160,7 +160,7 @@ package_arm64_alpine(){
 	build_message processing $ARM64_DOCKER_ALPINE_NAME
 	docker build 3.4/arm64_alpine/ -t $ARM64_DOCKER_ALPINE_NAME
 	build_message done processing $ARM64_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message processing $ARM64_DOCKER_ALPINE_NAME_LATEST
 		docker tag $ARM64_DOCKER_ALPINE_NAME $ARM64_DOCKER_ALPINE_NAME_LATEST
@@ -172,7 +172,7 @@ push_amd64(){
 	build_message pushing $AMD64_DOCKER_NAME
 	docker push $AMD64_DOCKER_NAME
 	build_message done pushing $AMD64_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $AMD64_DOCKER_NAME_LATEST
 		docker push $AMD64_DOCKER_NAME_LATEST
@@ -184,7 +184,7 @@ push_amd64_apache(){
 	build_message pushing $AMD64_DOCKER_APACHE_NAME
 	docker push $AMD64_DOCKER_APACHE_NAME
 	build_message done pushing $AMD64_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $AMD64_DOCKER_APACHE_NAME_LATEST
 		docker push $AMD64_DOCKER_APACHE_NAME_LATEST
@@ -196,7 +196,7 @@ push_amd64_alpine(){
 	build_message pushing $AMD64_DOCKER_ALPINE_NAME
 	docker push $AMD64_DOCKER_ALPINE_NAME
 	build_message done pushing $AMD64_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $AMD64_DOCKER_ALPINE_NAME_LATEST
 		docker push $AMD64_DOCKER_ALPINE_NAME_LATEST
@@ -208,7 +208,7 @@ push_arm(){
 	build_message pushing $ARM_DOCKER_NAME
 	docker push $ARM_DOCKER_NAME
 	build_message done pushing $ARM_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM_DOCKER_NAME_LATEST
 		docker push $ARM_DOCKER_NAME_LATEST
@@ -220,7 +220,7 @@ push_arm_apache(){
 	build_message pushing $ARM_DOCKER_APACHE_NAME
 	docker push $ARM_DOCKER_APACHE_NAME
 	build_message done pushing $ARM_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM_DOCKER_APACHE_NAME_LATEST
 		docker push $ARM_DOCKER_APACHE_NAME_LATEST
@@ -232,7 +232,7 @@ push_arm_alpine(){
 	build_message pushing $ARM_DOCKER_ALPINE_NAME
 	docker push $ARM_DOCKER_ALPINE_NAME
 	build_message done pushing $ARM_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM_DOCKER_ALPINE_NAME_LATEST
 		docker push $ARM_DOCKER_ALPINE_NAME_LATEST
@@ -244,7 +244,7 @@ push_arm64(){
 	build_message pushing $ARM64_DOCKER_NAME
 	docker push $ARM64_DOCKER_NAME
 	build_message done pushing $ARM64_DOCKER_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM64_DOCKER_NAME_LATEST
 		docker push $ARM64_DOCKER_NAME_LATEST
@@ -256,7 +256,7 @@ push_arm64_apache(){
 	build_message pushing $ARM64_DOCKER_APACHE_NAME
 	docker push $ARM64_DOCKER_APACHE_NAME
 	build_message done pushing $ARM64_DOCKER_APACHE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM64_DOCKER_APACHE_NAME_LATEST
 		docker push $ARM64_DOCKER_APACHE_NAME_LATEST
@@ -268,7 +268,7 @@ push_arm64_alpine(){
 	build_message pushing $ARM64_DOCKER_ALPINE_NAME
 	docker push $ARM64_DOCKER_ALPINE_NAME
 	build_message done pushing $ARM64_DOCKER_ALPINE_NAME
-	if [ "$BRANCH" = "multiarch" ]
+	if [ "$BRANCH" = "master" ]
 	then
 		build_message pushing $ARM64_DOCKER_ALPINE_NAME_LATEST
 		docker push $ARM64_DOCKER_ALPINE_NAME_LATEST
@@ -333,7 +333,7 @@ deploy_arm64_alpine(){
 #this will be the latest tag
 create_multiarch_manifest_moodole_apache(){
     build_message Creating moodole Multiarch Manifests for latest
-    if [ "$BRANCH" = "multiarch" ]
+    if [ "$BRANCH" = "master" ]
     then
         # $1: latest arm
         # $2: latest amd64   
@@ -357,7 +357,7 @@ create_multiarch_manifest_moodole_apache(){
 #this will be the nginx tag
 create_multiarch_manifest_moodole_nginx(){
     build_message Creating moodole Multiarch Manifests for nginx
-    if [ "$BRANCH" = "multiarch" ]
+    if [ "$BRANCH" = "master" ]
     then
         # $1: latest arm
         # $2: latest amd64   
@@ -381,7 +381,7 @@ create_multiarch_manifest_moodole_nginx(){
 #this will be the alpine tag
 create_multiarch_manifest_moodole_alpine(){
     build_message Creating moodole Multiarch Manifests for alpine
-    if [ "$BRANCH" = "multiarch" ]
+    if [ "$BRANCH" = "master" ]
     then
         # $1: latest arm
         # $2: latest amd64   
@@ -404,7 +404,7 @@ create_multiarch_manifest_moodole_alpine(){
 
 push_multiarch_manifests(){
     build_message Pushing Multiarch Manifests to cloud
-    if [ "$BRANCH" = "multiarch" ]
+    if [ "$BRANCH" = "master" ]
     then
         manifest_tool push from-spec /tmp/MA_manifests/MA_moodole_latest.yaml
         manifest_tool push from-spec /tmp/MA_manifests/MA_moodole_nginx.yaml
