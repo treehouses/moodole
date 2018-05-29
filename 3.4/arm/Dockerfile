@@ -1,7 +1,9 @@
-FROM arm32v7/debian:stretch-slim
+FROM resin/rpi-raspbian
+
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 LABEL MAINTAINER "Abdurrachman Mappuji <mappuji@ole.org>"
 LABEL MAINTAINER "dogi <stefan@unterhauser.name>"
+LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 
 ENV version '3.4.0'
 
