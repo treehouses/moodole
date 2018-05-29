@@ -23,12 +23,12 @@ prepare_package(){
 	if [ -z "$COMMIT" ]; then
 		COMMIT=${TRAVIS_COMMIT::8}
 	fi
-	X86_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
-	X86_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
-	X86_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:apache-$VERSION-$BRANCH-$COMMIT
-	X86_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:apache-latest
-	X86_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:alpine-$VERSION-$BRANCH-$COMMIT
-	X86_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:alpine-latest
+	AMD64_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:$VERSION-$BRANCH-$COMMIT
+	AMD64_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:latest
+	AMD64_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:apache-$VERSION-$BRANCH-$COMMIT
+	AMD64_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:apache-latest
+	AMD64_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:alpine-$VERSION-$BRANCH-$COMMIT
+	AMD64_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:alpine-latest
 	ARM_DOCKER_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-$VERSION-$BRANCH-$COMMIT
 	ARM_DOCKER_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-latest
 	ARM_DOCKER_APACHE_NAME=$DOCKER_ORG/$DOCKER_REPO:rpi-apache-$VERSION-$BRANCH-$COMMIT
@@ -37,39 +37,39 @@ prepare_package(){
 	ARM_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-latest
 }
 
-package_x86(){
-	build_message processing $X86_DOCKER_NAME
-	docker build 3.4/x86/ -t $X86_DOCKER_NAME
-	build_message done processing $X86_DOCKER_NAME
+package_amd64(){
+	build_message processing $AMD64_DOCKER_NAME
+	docker build 3.4/amd64/ -t $AMD64_DOCKER_NAME
+	build_message done processing $AMD64_DOCKER_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message processing $X86_DOCKER_NAME_LATEST
-		docker tag $X86_DOCKER_NAME $X86_DOCKER_NAME_LATEST
-		build_message done processing $X86_DOCKER_NAME_LATEST
+		build_message processing $AMD64_DOCKER_NAME_LATEST
+		docker tag $AMD64_DOCKER_NAME $AMD64_DOCKER_NAME_LATEST
+		build_message done processing $AMD64_DOCKER_NAME_LATEST
 	fi
 }
 
-package_x86_apache(){
-	build_message processing $X86_DOCKER_APACHE_NAME
-	docker build 3.4_apache/x86/ -t $X86_DOCKER_APACHE_NAME
-	build_message done processing $X86_DOCKER_APACHE_NAME
+package_amd64_apache(){
+	build_message processing $AMD64_DOCKER_APACHE_NAME
+	docker build 3.4_apache/amd64/ -t $AMD64_DOCKER_APACHE_NAME
+	build_message done processing $AMD64_DOCKER_APACHE_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message processing $X86_DOCKER_APACHE_NAME_LATEST
-		docker tag $X86_DOCKER_APACHE_NAME $X86_DOCKER_APACHE_NAME_LATEST
-		build_message done processing $X86_DOCKER_APACHE_NAME_LATEST
+		build_message processing $AMD64_DOCKER_APACHE_NAME_LATEST
+		docker tag $AMD64_DOCKER_APACHE_NAME $AMD64_DOCKER_APACHE_NAME_LATEST
+		build_message done processing $AMD64_DOCKER_APACHE_NAME_LATEST
 	fi
 }
 
-package_x86_alpine(){
-	build_message processing $X86_DOCKER_ALPINE_NAME
-	docker build 3.4/x86_alpine/ -t $X86_DOCKER_ALPINE_NAME
-	build_message done processing $X86_DOCKER_ALPINE_NAME
+package_amd64_alpine(){
+	build_message processing $AMD64_DOCKER_ALPINE_NAME
+	docker build 3.4/amd64_alpine/ -t $AMD64_DOCKER_ALPINE_NAME
+	build_message done processing $AMD64_DOCKER_ALPINE_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message processing $X86_DOCKER_ALPINE_NAME_LATEST
-		docker tag $X86_DOCKER_ALPINE_NAME $X86_DOCKER_ALPINE_NAME_LATEST
-		build_message done processing $X86_DOCKER_ALPINE_NAME_LATEST
+		build_message processing $AMD64_DOCKER_ALPINE_NAME_LATEST
+		docker tag $AMD64_DOCKER_ALPINE_NAME $AMD64_DOCKER_ALPINE_NAME_LATEST
+		build_message done processing $AMD64_DOCKER_ALPINE_NAME_LATEST
 	fi
 }
 
@@ -109,39 +109,39 @@ package_arm_alpine(){
 	fi
 }
 
-push_x86(){
-	build_message pushing $X86_DOCKER_NAME
-	docker push $X86_DOCKER_NAME
-	build_message done pushing $X86_DOCKER_NAME
+push_amd64(){
+	build_message pushing $AMD64_DOCKER_NAME
+	docker push $AMD64_DOCKER_NAME
+	build_message done pushing $AMD64_DOCKER_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message pushing $X86_DOCKER_NAME_LATEST
-		docker push $X86_DOCKER_NAME_LATEST
-		build_message done pushing $X86_DOCKER_NAME_LATEST
+		build_message pushing $AMD64_DOCKER_NAME_LATEST
+		docker push $AMD64_DOCKER_NAME_LATEST
+		build_message done pushing $AMD64_DOCKER_NAME_LATEST
 	fi
 }
 
-push_x86_apache(){
-	build_message pushing $X86_DOCKER_APACHE_NAME
-	docker push $X86_DOCKER_APACHE_NAME
-	build_message done pushing $X86_DOCKER_APACHE_NAME
+push_amd64_apache(){
+	build_message pushing $AMD64_DOCKER_APACHE_NAME
+	docker push $AMD64_DOCKER_APACHE_NAME
+	build_message done pushing $AMD64_DOCKER_APACHE_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message pushing $X86_DOCKER_APACHE_NAME_LATEST
-		docker push $X86_DOCKER_APACHE_NAME_LATEST
-		build_message done pushing $X86_DOCKER_APACHE_NAME_LATEST
+		build_message pushing $AMD64_DOCKER_APACHE_NAME_LATEST
+		docker push $AMD64_DOCKER_APACHE_NAME_LATEST
+		build_message done pushing $AMD64_DOCKER_APACHE_NAME_LATEST
 	fi
 }
 
-push_x86_alpine(){
-	build_message pushing $X86_DOCKER_ALPINE_NAME
-	docker push $X86_DOCKER_ALPINE_NAME
-	build_message done pushing $X86_DOCKER_ALPINE_NAME
+push_amd64_alpine(){
+	build_message pushing $AMD64_DOCKER_ALPINE_NAME
+	docker push $AMD64_DOCKER_ALPINE_NAME
+	build_message done pushing $AMD64_DOCKER_ALPINE_NAME
 	if [ "$BRANCH" = "master" ]
 	then
-		build_message pushing $X86_DOCKER_ALPINE_NAME_LATEST
-		docker push $X86_DOCKER_ALPINE_NAME_LATEST
-		build_message done pushing $X86_DOCKER_ALPINE_NAME_LATEST
+		build_message pushing $AMD64_DOCKER_ALPINE_NAME_LATEST
+		docker push $AMD64_DOCKER_ALPINE_NAME_LATEST
+		build_message done pushing $AMD64_DOCKER_ALPINE_NAME_LATEST
 	fi
 }
 
@@ -181,22 +181,22 @@ push_arm_alpine(){
 	fi
 }
 
-deploy_x86(){
+deploy_amd64(){
 	login_docker
-	package_x86
-	push_x86
+	package_amd64
+	push_amd64
 }
 
-deploy_x86_apache(){
+deploy_amd64_apache(){
 	login_docker
-	package_x86_apache
-	push_x86_apache
+	package_amd64_apache
+	push_amd64_apache
 }
 
-deploy_x86_alpine(){
+deploy_amd64_alpine(){
 	login_docker
-	package_x86_alpine
-	push_x86_alpine
+	package_amd64_alpine
+	push_amd64_alpine
 }
 
 deploy_arm(){
