@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:xenial
 LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
