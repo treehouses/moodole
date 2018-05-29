@@ -13,6 +13,19 @@ login_docker(){
     docker login --username=$DOCKER_USER --password=$DOCKER_PASS
 }
 
+prepare_multiarch_manifest_tool(){
+  build_message Prepare Manifest tool
+  sudo wget -O /usr/local/bin/manifest_tool https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
+  sudo chmod +x /usr/local/bin/manifest_tool
+  mkdir -p /tmp/MA_manifests
+}
+
+prepare_yq(){
+  build_message Prepare yq
+  sudo wget -O /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/1.14.1/yq_linux_amd64
+  sudo chmod +x /usr/local/bin/yq
+}
+
 prepare_package(){
 	DOCKER_ORG=treehouses
 	DOCKER_REPO=moodle-tags
@@ -41,6 +54,9 @@ prepare_package(){
 	ARM64_DOCKER_APACHE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm64-apache-latest
 	ARM64_DOCKER_ALPINE_NAME=$DOCKER_ORG/$DOCKER_REPO:arm64-alpine-$VERSION-$BRANCH-$COMMIT
 	ARM64_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:arm64-alpine-latest
+	
+	prepare_multiarch_manifest_tool
+	prepare_yq
 	
 }
 
@@ -312,4 +328,96 @@ deploy_arm64_alpine(){
 	login_docker
 	package_arm64_alpine
 	push_arm64_alpine
+}
+
+#this will be the latest tag
+create_multiarch_manifest_moodole_apache(){
+    build_message Creating moodole Multiarch Manifests for latest
+    if [ "$BRANCH" = "master" ]
+    then
+        # $1: latest arm
+        # $2: latest amd64   
+        # $3: latest arm64
+        yq n image treehouses/moodle:latest | \
+        yq w - manifests[0].image $1 | \
+        yq w - manifests[0].platform.architecture arm | \
+        yq w - manifests[0].platform.os linux | \
+        yq w - manifests[1].image $2 | \
+        yq w - manifests[1].platform.architecture amd64 | \
+        yq w - manifests[1].platform.os linux | \
+        yq w - manifests[2].image $3 | \
+        yq w - manifests[2].platform.architecture arm64 | \
+        yq w - manifests[2].platform.os linux | \
+        tee /tmp/MA_manifests/MA_moodole_latest.yaml
+    else
+        build_message Branch is Not master so no need to create Multiarch manifests for moodole for latest.
+    fi
+}
+
+#this will be the nginx tag
+create_multiarch_manifest_moodole_nginx(){
+    build_message Creating moodole Multiarch Manifests for nginx
+    if [ "$BRANCH" = "master" ]
+    then
+        # $1: latest arm
+        # $2: latest amd64   
+        # $3: latest arm64
+        yq n image treehouses/moodle:nginx | \
+        yq w - manifests[0].image $1 | \
+        yq w - manifests[0].platform.architecture arm | \
+        yq w - manifests[0].platform.os linux | \
+        yq w - manifests[1].image $2 | \
+        yq w - manifests[1].platform.architecture amd64 | \
+        yq w - manifests[1].platform.os linux | \
+        yq w - manifests[2].image $3 | \
+        yq w - manifests[2].platform.architecture arm64 | \
+        yq w - manifests[2].platform.os linux | \
+        tee /tmp/MA_manifests/MA_moodole_nginx.yaml
+    else
+        build_message Branch is Not master so no need to create Multiarch manifests for moodole for nginx.
+    fi
+}
+
+#this will be the alpine tag
+create_multiarch_manifest_moodole_alpine(){
+    build_message Creating moodole Multiarch Manifests for alpine
+    if [ "$BRANCH" = "master" ]
+    then
+        # $1: latest arm
+        # $2: latest amd64   
+        # $3: latest arm64
+        yq n image treehouses/moodle:alpine | \
+        yq w - manifests[0].image $1 | \
+        yq w - manifests[0].platform.architecture arm | \
+        yq w - manifests[0].platform.os linux | \
+        yq w - manifests[1].image $2 | \
+        yq w - manifests[1].platform.architecture amd64 | \
+        yq w - manifests[1].platform.os linux | \
+        yq w - manifests[2].image $3 | \
+        yq w - manifests[2].platform.architecture arm64 | \
+        yq w - manifests[2].platform.os linux | \
+        tee /tmp/MA_manifests/MA_moodole_alpine.yaml
+    else
+        build_message Branch is Not master so no need to create Multiarch manifests for moodole for alpine.
+    fi
+}
+
+push_multiarch_manifests(){
+    build_message Pushing Multiarch Manifests to cloud
+    if [ "$BRANCH" = "master" ]
+    then
+        manifest_tool push from-spec /tmp/MA_manifests/MA_moodole_latest.yaml
+        manifest_tool push from-spec /tmp/MA_manifests/MA_moodole_nginx.yaml
+        manifest_tool push from-spec /tmp/MA_manifests/MA_moodole_alpine.yaml
+        build_message Successfully Pushed Multiarch Manifests to cloud
+    else
+         build_message Branch is Not master so no need to Push Multiarch Manifests to cloud
+    fi
+}
+
+deploy_multiarch_manifests(){
+        create_multiarch_manifest_moodole_apache $ARM_DOCKER_APACHE_NAME_LATEST $AMD64_DOCKER_APACHE_NAME_LATEST $ARM64_DOCKER_APACHE_NAME_LATEST
+        create_multiarch_manifest_moodole_nginx $ARM_DOCKER_NAME_LATEST $AMD64_DOCKER_NAME_LATEST $ARM64_DOCKER_NAME_LATEST
+        create_multiarch_manifest_moodole_alpine $ARM_DOCKER_ALPINE_NAME_LATEST $AMD64_DOCKER_ALPINE_NAME_LATEST $ARM64_DOCKER_ALPINE_NAME_LATEST
+        push_multiarch_manifests
 }

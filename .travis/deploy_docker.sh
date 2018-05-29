@@ -17,5 +17,10 @@ build_message Build amd64 Alpine image started...
 deploy_amd64_alpine
 build_message Build amd64 Alpine image finished, check build result!
 
-build_message Now building for ARM...
+build_message Now building for ARM,ARM64...
 bash ./.travis/deploy_docker_rpi.sh  --branch="$BRANCH" --commit="$COMMIT" --duser="$DOCKER_USER" --dpass="$DOCKER_PASS"
+build_message Build for ARM,ARM64 finished, check build result!
+
+build_message Deploying multiarch manifests
+deploy_multiarch_manifests
+build_message Deployment for multiarch manifests finished, check build result!
