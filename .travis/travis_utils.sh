@@ -15,7 +15,7 @@ login_docker(){
 
 prepare_package(){
 	DOCKER_ORG=treehouses
-	DOCKER_REPO=moodle
+	DOCKER_REPO=moodle-tags
 	VERSION=$(cat package.json | grep version | awk '{print$2}' | awk '{print substr($0, 2, length($0) - 3)}')
 	if [ -z "$BRANCH" ]; then
 		BRANCH=$TRAVIS_BRANCH
