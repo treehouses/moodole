@@ -1,5 +1,6 @@
-FROM arm32v6/alpine
+FROM resin/raspberry-pi-alpine
 
+LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
 ENV version '3.4.0'
