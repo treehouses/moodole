@@ -44,33 +44,14 @@ prepare_package_arm(){
 	TEST_DIRECTORY=/tmp/"$FINGERPRINT"
 	REPO_LINK="https://github.com/treehouses/moodole.git"
 	FOOTPRINT_NAME=$VERSION-$BRANCH-$COMMIT
-	FOOTPRINT=~/travis-build/$FOOTPRINT_NAME
-}
-
-clone_branch(){
-    cd /tmp && rm -rf $FINGERPRINT;
-    git clone -b "$BRANCH" "$REPO_LINK" "$FINGERPRINT" && cd "$FINGERPRINT" || exit
-    ls
-    git checkout "$COMMIT_INPUT"
-}
-
-random_generator(){
-    awk -v min=10000000 -v max=99999999 'BEGIN{srand(); print int(min+rand()*(max-min+1))}'
 }
 
 build_message Preparing builds...
 prepare_package_arm
 
-build_message Cloning commits...
-clone_branch
-
-
 build_message setting up build utils...
 source ./.travis/travis_utils.sh
 prepare_package
-
-build_message Creating footprint...
-create_footprint_moodole
 
 build_message Build ARM image started...
 deploy_arm
@@ -83,7 +64,3 @@ build_message Buil ARM Apache image finished, check build result!
 build_message Build ARM Alpine image started...
 deploy_arm_alpine
 build_message Buil ARM Alpine image finished, check build result!
-
-build_message Peform postconditions on build machine..
-remove_temporary_folders
-create_footprint_moodole

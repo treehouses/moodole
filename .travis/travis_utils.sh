@@ -37,14 +37,6 @@ prepare_package(){
 	ARM_DOCKER_ALPINE_NAME_LATEST=$DOCKER_ORG/$DOCKER_REPO:rpi-alpine-latest
 }
 
-remove_temporary_folders(){
-	rm -rf "$TEST_DIRECTORY"
-}
-
-create_footprint_moodole() {
-  echo $(date +%Y-%m-%d.%H-%M-%S) from moodole >> $FOOTPRINT
-}
-
 package_x86(){
 	build_message processing $X86_DOCKER_NAME
 	docker build 3.4/x86/ -t $X86_DOCKER_NAME
