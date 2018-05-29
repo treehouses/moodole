@@ -39,7 +39,6 @@ build_message(){
 prepare_package_arm(){
 	BRANCH=$BRANCH_INPUT
 	COMMIT=${COMMIT_INPUT::8}
-	RANDOM_FINGERPRINT=$(random_generator)
 	FINGERPRINT="moodole-$RANDOM_FINGERPRINT"
 	TEST_DIRECTORY=/tmp/"$FINGERPRINT"
 	REPO_LINK="https://github.com/treehouses/moodole.git"
