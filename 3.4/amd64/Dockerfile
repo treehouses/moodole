@@ -26,7 +26,7 @@ RUN mkdir -p /var/www/html && \
     wget -O /var/www/moodle-${version}.tar.gz \
 		https://github.com/moodle/moodle/archive/v${version}.tar.gz && \
 	rm -rf /var/www/html/ && \
-	cd /var/www && tar xvf moodle-${version}.tar.gz && \
+	cd /var/www && tar xf moodle-${version}.tar.gz && \
 	mv /var/www/moodle-${version} /var/www/html && \
 	rm  moodle-${version}.tar.gz && \
 	chown -R www-data:www-data /var/www/html && \

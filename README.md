@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/treehouses/moodole.svg?branch=master)](https://travis-ci.org/treehouses/moodole)
 
-Moodle Docker for Raspberry Pi
+Multiarchitecture Moodle Docker for Raspberry Pi
+
+Supported architectures: `amd64`,`arm`,`arm64`
 
 https://hub.docker.com/r/treehouses/moodle/
 
@@ -39,7 +41,9 @@ docker-compose -f docker-compose-ready.yml down
 
 ## Different versions of docker-compose-ready.yml file
 
-**For x86:**
+**Note:** For Raspberry Pi Zero only the alpine version will work.
+
+**For Ubuntu version:**
 
 ```dockerfile
 version: '2'
@@ -70,7 +74,7 @@ services:
 
 ---
 
-**For x86 alpine:**
+**For Alpine version:**
 
 ```dockerfile
 version: '2'
@@ -84,7 +88,7 @@ services:
     - POSTGRES_USER=moodle
     - POSTGRES_PASSWORD=moodle
   moodle:
-    image: treehouses/moodle:alpine-latest
+    image: treehouses/moodle:alpine
     container_name: moodle
     ports:
       - "80:80"
@@ -100,63 +104,3 @@ services:
 ```
 
 ---
-
-**For ARM:**
-
-```dockerfile
-version: '2'
-services:
-  moodledb_rpi:
-    image: arm32v7/postgres
-    container_name: moodledb_rpi
-    environment:
-    # MAKE SURE THIS ONE SAME WITH THE MOODLE
-    - POSTGRES_DATABASE=moodle
-    - POSTGRES_USER=moodle
-    - POSTGRES_PASSWORD=moodle
-  moodle_rpi:
-    image: treehouses/moodle:rpi-latest
-    container_name: moodle_rpi
-    ports:
-      - "80:80"
-    environment:
-    - NGINX_PORT=80
-    - MOODOLE_DB_URL=moodledb_rpi
-    - MOODOLE_DB_NAME=moodle
-    - MOODOLE_DB_USER=moodle
-    - MOODOLE_DB_PASS=moodle
-    - MOODOLE_DB_PORT=5432
-    - MOODOLE_MAX_BODY_SIZE=200M
-    - MOODOLE_BODY_TIMEOUT=300s
-```
-
----
-
-**For ARM alpine:**
-
-```dockerfile
-version: '2'
-services:
-  moodledb_rpi_alpine:
-    image: arm32v7/postgres
-    container_name: moodledb_rpi_alpine
-    environment:
-    # MAKE SURE THIS ONE SAME WITH THE MOODLE
-    - POSTGRES_DATABASE=moodle
-    - POSTGRES_USER=moodle
-    - POSTGRES_PASSWORD=moodle
-  moodle_rpi_alpine:
-    image: treehouses/moodle:rpi-alpine-latest
-    container_name: moodle_rpi_alpine
-    ports:
-      - "80:80"
-    environment:
-    - NGINX_PORT=80
-    - MOODOLE_DB_URL=moodledb_rpi_alpine
-    - MOODOLE_DB_NAME=moodle
-    - MOODOLE_DB_USER=moodle
-    - MOODOLE_DB_PASS=moodle
-    - MOODOLE_DB_PORT=5432
-    - MOODOLE_MAX_BODY_SIZE=200M
-    - MOODOLE_BODY_TIMEOUT=300s
-```

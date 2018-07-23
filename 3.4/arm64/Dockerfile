@@ -1,4 +1,4 @@
-FROM multiarch/ubuntu-core:armhf-xenial
+FROM multiarch/ubuntu-core:arm64-xenial
 LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 LABEL MAINTAINER "Abdurrachman Mappuji <mappuji@ole.org>"
