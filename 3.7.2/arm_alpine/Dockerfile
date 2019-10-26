@@ -1,9 +1,8 @@
 FROM resin/raspberry-pi-alpine
 
-LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
-LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
+LABEL MAINTAINER "Lixiao Li <lillyxxx@ole.org>"
 
-ENV version '3.4.0'
+ENV version '3.7.2'
 
 ADD ./start.sh /etc/nginx/start.sh
 COPY ./moodle /etc/nginx/sites-available/moodle.conf.template
