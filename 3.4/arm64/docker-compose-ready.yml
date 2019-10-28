@@ -1,7 +1,7 @@
 version: '2'
 services:
   moodledb_rpi:
-    image: arm32v7/postgres
+    image: arm32v7/postgres:10.3
     container_name: moodledb_rpi
     environment:
     # MAKE SURE THIS ONE SAME WITH THE MOODLE
