@@ -1,9 +1,8 @@
-FROM resin/raspberry-pi-alpine
+FROM {{base_image}}
 
-LABEL MAINTAINER "Sahil Phule <sahil@ole.org>"
 LABEL MAINTAINER "Dashlorde <zhouyunlu0216@gmail.com>"
 
-ENV version '3.4.0'
+ENV version '3.10.0'
 
 ADD ./start.sh /etc/nginx/start.sh
 COPY ./moodle /etc/nginx/sites-available/moodle.conf.template
@@ -44,10 +43,11 @@ RUN mkdir -p /var/lib/nginx/html && \
     sed -i 's/post_max_size = 8M/post_max_size = 200M/g' /etc/php7/php.ini && \
     mkdir -p /run/nginx && \
     ln -s /etc/nginx/sites-available/moodle.conf /etc/nginx/conf.d/moodle.conf && \
-	unlink /etc/nginx/conf.d/default.conf
+	  unlink /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
 ADD ./config.php /var/lib/nginx/html/
+
 
 CMD ["/etc/nginx/start.sh"]
