@@ -1,4 +1,4 @@
-#!bin/sh
+#!/bin/sh
 
 # /etc/nginx/sites-available/moodle
 NGINX_CONFIG="/etc/nginx/sites-available/moodle.conf"
@@ -8,7 +8,6 @@ if [ -z "$NGINX_PORT" ]
 then
     NGINX_PORT="$DEFAULT_PORT"
 fi
-
 envsubst '$NGINX_PORT' < $NGINX_CONFIG.template > $NGINX_CONFIG
 
 if [ ! -z "${MOODOLE_MAX_BODY_SIZE}" ]
@@ -55,4 +54,5 @@ fi
 
 /usr/sbin/nginx
 
+touch /var/log/nginx/access.log
 tail -f /var/log/nginx/access.log
